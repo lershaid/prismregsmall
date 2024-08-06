@@ -80,13 +80,15 @@
             <div id="popup-content"></div>
         </div>
     </div>
-   <script>
-document.getElementById('inclicky').addEventListener('click', function() {
-    window.parent.postMessage('callCustomFunction', '*');
-});
-</script>
-   
- 
+
+    <script>
+        document.getElementById('clicky').addEventListener('click', function () {
+            // Send a message to the parent window
+            window.parent.postMessage('buttonClicked',
+                '*'); // '*' allows any origin (adjust if security is critical)
+        });
+    </script>
+
     <script src="resources/qgis2web.js">
     </script>
     <script src="resources/qgis2web_expressions.js"></script>
@@ -94,7 +96,7 @@ document.getElementById('inclicky').addEventListener('click', function() {
     <script>
         proj4.defs('EPSG:3857',
             '+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs'
-            );
+        );
     </script>
     <script src="resources/polyfills.js"></script>
     <script src="./resources/functions.js"></script>
