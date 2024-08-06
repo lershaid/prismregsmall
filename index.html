@@ -81,11 +81,10 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('inclicky').addEventListener('click', function () {
-            // Send a message to the parent window
-            window.parent.postMessage('buttonClicked',
-                '*'); // '*' allows any origin (adjust if security is critical)
+    <script const inclicky=document.querySelector('#inclicky'); inclicky.addEventListener('click', ()=>
+        {
+            window.parent.postMessage('Hello from the child!', '*');
+            window.parent.bubble_fn_custom_event();
         });
     </script>
 
