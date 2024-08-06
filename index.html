@@ -31,6 +31,19 @@
         .ol-control {
             background-color: rgba(255,255,255,.4) !important;
             padding: 2px !important;
+        }
+         .blue-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
         } 
         </style>
 
@@ -51,6 +64,7 @@
                 <div id="popup-content"></div>
             </div>
         </div>
+        <button class="blue-button">Click Me</button>
         <script src="resources/qgis2web_expressions.js"></script>
 <script src="resources/proj4.js"></script>
         <script>proj4.defs('EPSG:3857','+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs');</script>
