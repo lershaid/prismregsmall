@@ -1,38 +1,49 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="./resources/ol.css">
-        <link rel="stylesheet" href="resources/fontawesome-all.min.css">
-        <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
-        <link rel="stylesheet" href="./resources/qgis2web.css">
-        <style>
-        html, body {
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="./resources/ol.css">
+    <link rel="stylesheet" href="resources/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
+    <link rel="stylesheet" href="./resources/qgis2web.css">
+    <style>
+        html,
+        body {
             background-color: #ffffff;
         }
-        .ol-control > * {
-            background-color: #f8f8f8!important;
-            color: #444444!important;
+
+        .ol-control>* {
+            background-color: #f8f8f8 !important;
+            color: #444444 !important;
             border-radius: 0px;
         }
-        .ol-attribution a, .gcd-gl-input::placeholder, .search-layer-input-search::placeholder {
-            color: #444444!important;
+
+        .ol-attribution a,
+        .gcd-gl-input::placeholder,
+        .search-layer-input-search::placeholder {
+            color: #444444 !important;
         }
+
         .search-layer-input-search {
-            background-color: #f8f8f8!important;
+            background-color: #f8f8f8 !important;
         }
-        .ol-control > *:focus, .ol-control >*:hover {
-            background-color: rgba(248, 248, 248, 0.7)!important;
-        } 
+
+        .ol-control>*:focus,
+        .ol-control>*:hover {
+            background-color: rgba(248, 248, 248, 0.7) !important;
+        }
+
         .ol-control {
-            background-color: rgba(255,255,255,.4) !important;
+            background-color: rgba(255, 255, 255, .4) !important;
             padding: 2px !important;
         }
-         .blue-button {
+
+        .blue-button {
             background-color: blue;
             color: white;
             border: none;
@@ -44,47 +55,69 @@
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 4px;
-        } 
-        </style>
+        }
+    </style>
 
-        <style>
-        html, body, #map {
+    <style>
+        html,
+        body,
+        #map {
             width: 100%;
             height: 100%;
             padding: 0;
             margin: 0;
         }
-        </style>
-        <title></title>
-    </head>
-    <body>
-         
-        <div id="map">
-            <button id="inclicky" class="blue-button">Send Outside</button>
-            <div id="popup" class="ol-popup">
-                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                <div id="popup-content"></div>
-            </div>
-        </div>
-       <script>const inclicky = document.querySelector('#inclicky');
+    </style>
+    <title></title>
+</head>
 
-inclicky.addEventListener('click', () => {
-    window.parent.postMessage('Hello from the child!', '*');
-    window.parent.bubble_fn_custom_event();
-});</script>
-        <script src="resources/qgis2web.js">
-       </script>
-        <script src="resources/qgis2web_expressions.js"></script>
-<script src="resources/proj4.js"></script>
-        <script>proj4.defs('EPSG:3857','+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs');</script>
-        <script src="resources/polyfills.js"></script>
-        <script src="./resources/functions.js"></script>
-        <script src="./resources/ol.js"></script>
-        <script src="./resources/ol-layerswitcher.js"></script>
-        <script src="layers/plot210d_1.js"></script><script src="layers/plot209d_2.js"></script><script src="layers/plot198d_3.js"></script><script src="layers/plot197d_4.js"></script>
-        <script src="styles/plot210d_1_style.js"></script><script src="styles/plot209d_2_style.js"></script><script src="styles/plot198d_3_style.js"></script><script src="styles/plot197d_4_style.js"></script>
-        <script src="./layers/layers.js" type="text/javascript"></script> 
-        <script src="./resources/Autolinker.min.js"></script>
-        <script src="./resources/qgis2web.js"></script>
-    </body>
+<body>
+
+    <div id="map">
+        <button id="inclicky" class="blue-button">Send Outside</button>
+        <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+        </div>
+    </div>
+   <script>
+document.getElementById('inclicky').addEventListener('click', function() {
+    window.parent.postMessage('callCustomFunction', '*');
+});
+</script>
+   
+    <!--  <script>
+        const inclicky = document.querySelector('#inclicky');
+
+        inclicky.addEventListener('click', () => {
+            window.parent.postMessage('Hello from the child!', '*');
+            window.parent.bubble_fn_custom_event();
+        });
+    </script> -->
+    <script src="resources/qgis2web.js">
+    </script>
+    <script src="resources/qgis2web_expressions.js"></script>
+    <script src="resources/proj4.js"></script>
+    <script>
+        proj4.defs('EPSG:3857',
+            '+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs'
+            );
+    </script>
+    <script src="resources/polyfills.js"></script>
+    <script src="./resources/functions.js"></script>
+    <script src="./resources/ol.js"></script>
+    <script src="./resources/ol-layerswitcher.js"></script>
+    <script src="layers/plot210d_1.js"></script>
+    <script src="layers/plot209d_2.js"></script>
+    <script src="layers/plot198d_3.js"></script>
+    <script src="layers/plot197d_4.js"></script>
+    <script src="styles/plot210d_1_style.js"></script>
+    <script src="styles/plot209d_2_style.js"></script>
+    <script src="styles/plot198d_3_style.js"></script>
+    <script src="styles/plot197d_4_style.js"></script>
+    <script src="./layers/layers.js" type="text/javascript"></script>
+    <script src="./resources/Autolinker.min.js"></script>
+    <script src="./resources/qgis2web.js"></script>
+</body>
+
 </html>
