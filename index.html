@@ -82,7 +82,7 @@
     </div>
 
     <script>
-        const popup = document.querySelector('.ol-overlay-container');
+        const popup = document.querySelector('.ol-overlay-container.ol-selectable');
         popup.addEventListener('click', () => {
             window.parent.postMessage('custom_event', 'https://forestreg.bubbleapps.io');
         });
