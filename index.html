@@ -74,7 +74,7 @@
 <body>
 
     <div id="map">
-        <button id="inclicky" class="blue-button">Send Outside</button>
+       
         <div id="popup" class="ol-popup">
             <a href="#" id="popup-closer" class="ol-popup-closer"></a>
             <div id="popup-content"></div>
@@ -82,8 +82,8 @@
     </div>
 
     <script>
-        const inclicky = document.querySelector('#inclicky');
-        inclicky.addEventListener('click', () => {
+        const popup = document.querySelector('#popup');
+        popup.addEventListener('click', () => {
             window.parent.postMessage('custom_event', 'https://forestreg.bubbleapps.io');
         });
     </script>
