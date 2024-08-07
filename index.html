@@ -84,8 +84,7 @@
     <script>
         const inclicky = document.querySelector('#inclicky');
         inclicky.addEventListener('click', () => {
-            window.parent.postMessage('Hello from the child!', '*');
-            window.parent.bubble_fn_custom_event();
+            window.parent.postMessage('custom_event', 'https://forestreg.bubbleapps.io');
         });
     </script>
 
