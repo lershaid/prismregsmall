@@ -74,7 +74,6 @@
 <body>
 
     <div id="map">
-       
         <div id="popup" class="ol-popup">
             <a href="#" id="popup-closer" class="ol-popup-closer"></a>
             <div id="popup-content"></div>
@@ -82,20 +81,88 @@
     </div>
 
     <script>
+        // Your existing popup script
         const popup = document.querySelector('#popup');
         popup.addEventListener('click', () => {
             window.parent.postMessage('custom_event', 'https://forestreg.bubbleapps.io');
         });
+
+        // Import the necessary layer scripts
+        // These should match the script tags in your original HTML
+        var plot210d_1 = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'layers/plot210d_1.js',
+                format: new ol.format.GeoJSON()
+            })
+        });
+
+        var plot209d_2 = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'layers/plot209d_2.js',
+                format: new ol.format.GeoJSON()
+            })
+        });
+
+        var plot198d_3 = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'layers/plot198d_3.js',
+                format: new ol.format.GeoJSON()
+            })
+        });
+
+        var plot197d_4 = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'layers/plot197d_4.js',
+                format: new ol.format.GeoJSON()
+            })
+        });
+
+        // Initialize the map and layers
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+                plot210d_1,
+                plot209d_2,
+                plot198d_3,
+                plot197d_4
+            ],
+            view: new ol.View({
+                center: [0, 0],
+                zoom: 2
+            })
+        });
+
+        map.on('click', function(event) {
+            var pixel = event.pixel;
+            var clickedFeatureGeoJSON = null;
+
+            map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+                if (layer instanceof ol.layer.Vector) {
+                    var geojsonFormat = new ol.format.GeoJSON();
+                    clickedFeatureGeoJSON = geojsonFormat.writeFeature(feature);
+
+                    // Post message to the parent window
+                    window.parent.postMessage({
+                        type: 'feature_click',
+                        data: clickedFeatureGeoJSON
+                    }, 'https://forestreg.bubbleapps.io');
+
+                    // Optional: Display the feature GeoJSON in the popup
+                    document.getElementById('popup-content').innerHTML = clickedFeatureGeoJSON;
+                }
+            });
+
+            if (clickedFeatureGeoJSON === null) {
+                console.log('No feature clicked');
+            }
+        });
     </script>
 
-    <script src="resources/qgis2web.js">
-    </script>
+    <script src="resources/qgis2web.js"></script>
     <script src="resources/qgis2web_expressions.js"></script>
     <script src="resources/proj4.js"></script>
     <script>
-        proj4.defs('EPSG:3857',
-            '+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs'
-        );
+        proj4.defs('EPSG:3857', '+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs');
     </script>
     <script src="resources/polyfills.js"></script>
     <script src="./resources/functions.js"></script>
